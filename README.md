@@ -1,5 +1,5 @@
-#Custom RISC V RV32I CPU Project'
-## Target Technical Objectives '
+# Custom RISC V RV32I CPU Project
+## Target Technical Objectives 
  - Design a small Harvard architecture CPU from RTL -> layout stage using the RISC V RV32I ISA.
  - CPU will implement 8 instructions of the RISC V RV32I ISA:
    - ADD
