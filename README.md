@@ -12,4 +12,15 @@ By: Riddhiman Das Roy, Karthikraj Maheshkumar
    - SW 
    - BEQ
 
+## Developmental Steps
+### 1.) Project Definition Stage 
+### 2.) Datapath Development Stage
+### 3.) RTL Design and Verification Stage
+### 4.) Physical Layout and Verification 
+
+## Projected Developmental Timeline 
+### Project Definition Stage: June 15th - July 11th
+### Datapath Development Stage: July 11th - August 2nd 
+### RTL Design and Verification Stage: August 2nd - August 20th 
+### Physical Layout and Verification: August 20th - September 25th 
 
