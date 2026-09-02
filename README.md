@@ -18,7 +18,7 @@ By: Riddhiman Das Roy, Karthikraj Maheshkumar
    - LW
    - SW 
    - BEQ
-   - 
+     
 After RTL design and verification, the processor will be implemented using 45 nm PDK. Cadence Genus, Cadence Innovus and Cadence Virtuouso will be the primary tools for synthesis and physical layout. 
 
 
