@@ -1,7 +1,14 @@
 # Custom RISC V RV32I CPU Project
 By: Riddhiman Das Roy, Karthikraj Maheshkumar
-## Target Technical Objectives 
- - Design a small Harvard architecture CPU from RTL -> layout stage using the RISC V RV32I ISA.
+
+## Developmental Steps
+#### 1.) Project Definition Stage 
+#### 2.) Datapath Development Stage
+#### 3.) RTL Design and Verification Stage
+#### 4.) Physical Layout and Verification 
+
+## Project Definition Stage and Target Technical Objectives 
+ - Design a small Harvard architecture CPU from RTL -> GDS2 stage using the RISC V RV32I ISA.
  - CPU will implement 8 instructions of the RISC V RV32I ISA:
    - ADD
    - SUB
@@ -11,17 +18,16 @@ By: Riddhiman Das Roy, Karthikraj Maheshkumar
    - LW
    - SW 
    - BEQ
+     
+After RTL design and verification, the processor will be implemented using 45 nm PDK. Cadence Genus, Cadence Innovus and Cadence Virtuouso will be the primary tools for synthesis and physical layout. 
 
-## Developmental Steps
-#### 1.) Project Definition Stage 
-#### 2.) Datapath Development Stage
-#### 3.) RTL Design and Verification Stage
-#### 4.) Physical Layout and Verification 
+## Datapath and Pipeline Stages 
+The following datapath shows the pipeline stages and Hazard Detection/Forward Detection unit signals of the processor:
+<img width="2122" height="1110" alt="DataPath1 drawio" src="https://github.com/user-attachments/assets/e3d956f6-5a1b-4d58-8d24-d09e3a08ace3" />
 
 
-## Projected Developmental Timeline 
-#### Project Definition Stage: June 15th - July 11th
-#### Datapath Development Stage: July 11th - August 2nd 
-#### RTL Design and Verification Stage: August 2nd - August 20th 
-#### Physical Layout and Verification: August 20th - September 25th 
+
+
+
+
 
