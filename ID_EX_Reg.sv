@@ -7,6 +7,7 @@ module ID_EX_Reg (
     output logic [31:0] pc_out, data1_out, data2_out, imm_out,
     output logic RegWrite_out, MemtoReg_out, ALUSrc_out, MemRead_out, MemWrite_out, Branch_out, Uses_rs2_out,
     output logic [4:0] rs1_out, rs2_out, rd_out,
+    output logic [2:0] ALUOp_out
 );
 
     always_ff @(posedge clk or posedge rst) begin
@@ -25,6 +26,7 @@ module ID_EX_Reg (
             MemWrite_out <= 1'b0;
             Branch_out <= 1'b0;
             Uses_rs2_out <= 1'b0;
+            ALUOp_out <= 3'b0;
         end else if (flush) begin
             pc_out <= 32'b0;
             data1_out <= 32'b0;
@@ -40,6 +42,7 @@ module ID_EX_Reg (
             MemWrite_out <= 1'b0;
             Branch_out <= 1'b0;
             Uses_rs2_out <= 1'b0;
+            ALUOp_out <= 3'b0;
         end else begin
             pc_out <= pc_in;
             data1_out <= data1_in;
@@ -55,6 +58,7 @@ module ID_EX_Reg (
             MemWrite_out <= MemWrite_in;
             Branch_out <= Branch_in;
             Uses_rs2_out <= Uses_rs2_in;
+            ALUOp_out <= ALUOp_in;
         end 
     end
 
