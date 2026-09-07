@@ -1,5 +1,5 @@
 module IF_ID_Register (
-    input logic clk, rst, ID_IF_write,
+    input logic clk, rst, ID_IF_write, flush,
     input logic [31:0] pc_in, instruction_in,
     output logic [31:0] pc_out, instruction_out
 );
@@ -8,9 +8,12 @@ module IF_ID_Register (
         if (rst) begin
             pc_out <= 32'b0;
             instruction_out <= 32'b0;
-        end else if (ID_IF_write) begin
+        end else if (ID_IF_write && !flush) begin
             pc_out <= pc_in;
             instruction_out <= instruction_in;
+        end else if (flush) begin
+            pc_out <= 32'b0;
+            instruction_out <= 32'b0;
         end
     end
 

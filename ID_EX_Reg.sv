@@ -1,13 +1,14 @@
 module ID_EX_Reg (
-    input logic clk, rst, flush,
+    input logic clk, rst, HDU_flush, Branch_flush,
     input logic [31:0] pc_in, data1_in, data2_in, imm_in,
     input logic [4:0] rs1_in, rs2_in, rd_in,
     input logic RegWrite_in, MemtoReg_in, ALUSrc_in, MemRead_in, MemWrite_in, Branch_in, Uses_rs2_in,
     input logic [2:0] ALUOp_in,
+    output logic [2:0] ALUOp_out,
     output logic [31:0] pc_out, data1_out, data2_out, imm_out,
     output logic RegWrite_out, MemtoReg_out, ALUSrc_out, MemRead_out, MemWrite_out, Branch_out, Uses_rs2_out,
-    output logic [4:0] rs1_out, rs2_out, rd_out,
-    output logic [2:0] ALUOp_out
+    output logic [4:0] rs1_out, rs2_out, rd_out
+    
 );
 
     always_ff @(posedge clk or posedge rst) begin
@@ -27,7 +28,7 @@ module ID_EX_Reg (
             Branch_out <= 1'b0;
             Uses_rs2_out <= 1'b0;
             ALUOp_out <= 3'b0;
-        end else if (flush) begin
+        end else if (HDU_flush || Branch_flush) begin
             pc_out <= 32'b0;
             data1_out <= 32'b0;
             data2_out <= 32'b0;
