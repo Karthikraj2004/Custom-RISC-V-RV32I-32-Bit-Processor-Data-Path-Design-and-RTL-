@@ -26,7 +26,7 @@ The following datapath shows the pipeline stages and Hazard Detection/Forward De
 <img width="2122" height="1110" alt="DataPath1 drawio" src="https://github.com/user-attachments/assets/e3d956f6-5a1b-4d58-8d24-d09e3a08ace3" />
 
 The following datapath shows the pipelined stages, HDU, FDU along with the CU signals. 
-<img width="2215" height="1458" alt="DataPath2" src="https://github.com/user-attachments/assets/3b1a1dff-c733-4e25-bc66-cce1f0eb0520" />
+<img width="2215" height="1458" alt="DataPath1 (1)" src="https://github.com/user-attachments/assets/3878a527-9e3f-48bb-b499-bd6a7b8c4de6" />
 
 
 
