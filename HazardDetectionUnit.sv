@@ -1,17 +1,17 @@
 module HDU (
     input logic [4:0] rs1, rs2, rd,
     input logic MemRead, RS2_Use,
-    output logic pc_write, flush, ID_IF_write
+    output logic pc_write, flush, IF_ID_write
 );
 
     always_comb begin 
         pc_write = 1;
         flush = 0;
-        ID_IF_write = 1;
+        IF_ID_write = 1;
         if (MemRead && rd != 5'b00000 && (rs1 == rd || (RS2_Use && rs2 == rd))) begin
             pc_write = 0;
             flush = 1;
-            ID_IF_write = 0;
+            IF_ID_write = 0;
         end  
     end
 
