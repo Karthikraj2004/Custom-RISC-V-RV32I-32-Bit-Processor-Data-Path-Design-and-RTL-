@@ -1,4 +1,5 @@
 module Register (
+    input logic clk, rst,
     input logic [4:0] reg1,
     input logic [4:0] reg2,
     input logic [4:0] WriteReg,
@@ -9,11 +10,15 @@ module Register (
 
     logic [31:0] Reg[31:0];
 
-    assign data1 = (reg1 == 5'b0) ? 32b'0 : Reg[reg1];
-    assign data2 = (reg2 == 5'b0) ? 32b'0 : Reg[reg2];
+    assign data1 = (reg1 == 5'b0) ? 32'b0 : Reg[reg1];
+    assign data2 = (reg2 == 5'b0) ? 32'b0 : Reg[reg2];
 
-    always_ff @(posedge RegWrite) begin
-        if (RegWrite && WriteReg != 5'b0) begin
+    always_ff @(posedge clk or posedge rst) begin
+        if (rst) begin
+            for (int i = 0; i < 32; i++) begin
+                Reg[i] <= 32'b0;
+            end
+        end else if (RegWrite && WriteReg != 5'b0) begin
             Reg[WriteReg] <= WriteData;
         end
     end
