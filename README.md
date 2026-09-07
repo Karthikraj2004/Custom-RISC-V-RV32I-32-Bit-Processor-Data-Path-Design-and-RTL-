@@ -25,6 +25,10 @@ After RTL design and verification, the processor will be implemented using 45 nm
 The following datapath shows the pipeline stages and Hazard Detection/Forward Detection unit signals of the processor:
 <img width="2122" height="1110" alt="DataPath1 drawio" src="https://github.com/user-attachments/assets/e3d956f6-5a1b-4d58-8d24-d09e3a08ace3" />
 
+The following datapath shows the pipelined stages, HDU, FDU along with the CU signals. 
+<img width="2215" height="1458" alt="DataPath1 (1)" src="https://github.com/user-attachments/assets/3878a527-9e3f-48bb-b499-bd6a7b8c4de6" />
+
+
 
 
 
