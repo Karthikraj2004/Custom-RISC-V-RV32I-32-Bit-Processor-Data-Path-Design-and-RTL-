@@ -9,7 +9,7 @@ module top_level (
     PC pc_module (
         .clk(clk),
         .rst(rst),
-        .pc_write_enable(pc_write_enable),
+        .pc_write(pc_write_enable),
         .next_pc(pc_new_in),
         .pc(pc_new_out)
     );
@@ -56,14 +56,14 @@ module top_level (
     logic [31:0] ImmGen_imm_out;
     ImmGen immgen_module (
         .instruction(IF_ID_instruction_out),
-        .imm_out(ImmGen_imm_out)
+        .imm(ImmGen_imm_out)
     );
 
     //Control Unit (CU) instantiation
     logic ALUSrc, MemtoReg, RegWrite, MemRead, MemWrite, CU_Branch, Uses_rs2;
     logic [2:0] ALUOp;
     CU cu_module (
-        .opcode(IF_ID_instruction_out[6:0]),
+        .opcode(IF_ID_instruction_out[6:0]),    //Need to type cast as type opcode 
         .funct3(IF_ID_instruction_out[14:12]),
         .funct7(IF_ID_instruction_out[31:25]),
         .RegWrite(RegWrite),
@@ -213,7 +213,8 @@ module top_level (
         .MemtoReg_out(EX_Mem_MemtoReg_out),
         .MemRead_out(EX_Mem_MemRead_out),
         .MemWrite_out(EX_Mem_MemWrite_out),
-        .Branch_out(EX_Mem_Branch)
+        .Branch_out(EX_Mem_Branch),
+        .ALU_Zero(EX_Mem_ALU_Zero)
     );
 
     //EX_Mem instantiation end
