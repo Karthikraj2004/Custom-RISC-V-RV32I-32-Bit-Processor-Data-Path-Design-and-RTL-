@@ -17,18 +17,16 @@ module top_level (
     //PC Adder Logic
     logic [31:0] pc_adder_out;
     logic [31:0] EX_Mem_pc_out, EX_Mem_Imm, Branch_Target;
+    logic branch_flush;
+
+    assign branch_flush = EX_Mem_Branch && EX_Mem_ALU_Zero;
 
     //PC incremnter logic
     assign pc_adder_out = pc_new_out + 4;
     //Branch Target Logic
     assign Branch_Target = EX_Mem_pc_out + EX_Mem_Imm;
     //PC next address selection
-    assign pc_new_in = (EX_Mem_Branch && EX_Mem_ALU_Zero) ? Branch_Target : pc_adder_out;
-
-    //Branch Flush Signal
-    logic branch_flush;
-    assign branch_flush = EX_Mem_Branch && EX_Mem_ALU_Zero;
-    //End of PC logic
+    assign pc_new_in = (branch_flush) ? Branch_Target : pc_adder_out;
 
     //Instruction Memory (IM) instantiation
 
@@ -79,8 +77,8 @@ module top_level (
     );
 
     //Hazard Detection Unit (HDU) instantiation
-    logic Hazard_Flush;
-    //logic [4:0] ID_EX_rd_out;
+    logic Hazard_Flush, ID_EX_MemRead_out;
+    logic [4:0] ID_EX_rd_out;
 
     HDU hdu_module (
         .rs1(IF_ID_instruction_out[19:15]),
@@ -96,13 +94,14 @@ module top_level (
 
     //Register File (RF) instantiation
     logic [31:0] RF_data1_out, RF_data2_out, RF_Write_Data;
-    logic [4:0] Mem_WB_rd;
+    logic [4:0] MEM_WB_rd;
+    logic MEM_WB_RegWrite_out;
     Register reg_module (
         .clk(clk),
         .rst(rst),
         .reg1(IF_ID_instruction_out[19:15]),
         .reg2(IF_ID_instruction_out[24:20]),
-        .WriteReg(Mem_WB_rd),
+        .WriteReg(MEM_WB_rd),
         .WriteData(RF_Write_Data),
         .RegWrite(MEM_WB_RegWrite_out),
         .data1(RF_data1_out),
@@ -113,9 +112,9 @@ module top_level (
     //ID/EX Register instantiation
     logic [2:0] ID_EX_ALUOp_out;
     logic [31:0] ID_EX_pc_out, ID_EX_data1_out, ID_EX_data2_out, ID_EX_imm_out;
-    logic [4:0] ID_EX_rs1_out, ID_EX_rs2_out, ID_EX_rd_out;
-    logic ID_EX_RegWrite_out, ID_EX_MemtoReg_out, ID_EX_ALUSrc_out, ID_EX_MemRead_out, ID_EX_MemWrite_out, ID_EX_Branch_out, ID_EX_Uses_rs2_out;
-    ID_EX_Register id_ex_module (
+    logic [4:0] ID_EX_rs1_out, ID_EX_rs2_out;
+    logic ID_EX_RegWrite_out, ID_EX_ALUSrc_out, ID_EX_MemWrite_out, ID_EX_Branch_out, ID_EX_Uses_rs2_out;
+    ID_EX_Reg id_ex_module (
         .clk(clk),
         .rst(rst),
         .HDU_flush(Hazard_Flush),
@@ -221,8 +220,6 @@ module top_level (
 
     //Forwarding Unit instantiation
     //NOTE: ForwardA, ForwardB already declared above
-    logic [4:0] MEM_WB_rd;
-    logic MEM_WB_RegWrite_out;
     
     FDU fdu_module (
         .ID_EX_rs1(ID_EX_rs1_out),
