@@ -8,7 +8,7 @@ typedef enum logic [6:0] {
 
 
 module CU (
-    input opcode_t opcode,
+    input logic [6:0] opcode,
     input logic [2:0] funct3,
     input logic [6:0] funct7,
     output logic ALUSrc,
@@ -21,8 +21,8 @@ module CU (
     output logic [2:0] ALUOp
 );
 
-    //opcode_t opcode_var;
-    //opcode_var = opcode_t'(opcode);
+    opcode_t opcode_var;
+    assign opcode_var = opcode_t'(opcode);
 
     always_comb begin 
         RegWrite = 1'b0;
@@ -34,7 +34,7 @@ module CU (
         Uses_rs2 = 1'b1;
         ALUOp = 3'b000; // Default ALU operation
 
-        case (opcode)
+        case (opcode_var)
             OP_R_TYPE: begin
                 RegWrite = 1;
 
