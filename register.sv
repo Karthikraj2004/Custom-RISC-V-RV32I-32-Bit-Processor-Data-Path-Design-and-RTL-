@@ -10,8 +10,13 @@ module Register (
 
     logic [31:0] Reg[31:0];
 
-    assign data1 = (reg1 == 5'b0) ? 32'b0 : Reg[reg1];
-    assign data2 = (reg2 == 5'b0) ? 32'b0 : Reg[reg2];
+    assign data1 = (reg1 == 5'b0) ? 32'b0 :
+               (RegWrite && WriteReg != 5'b0 && WriteReg == reg1) ? WriteData :
+               Reg[reg1];
+
+    assign data2 = (reg2 == 5'b0) ? 32'b0 :
+               (RegWrite && WriteReg != 5'b0 && WriteReg == reg2) ? WriteData :
+               Reg[reg2];
 
     always_ff @(posedge clk or posedge rst) begin
         if (rst) begin
