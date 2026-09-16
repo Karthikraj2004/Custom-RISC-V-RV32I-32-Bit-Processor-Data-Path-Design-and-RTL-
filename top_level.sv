@@ -16,7 +16,7 @@ module top_level (
 
     //PC Adder Logic
     logic [31:0] pc_adder_out;
-    logic [31:0] EX_Mem_pc_out, EX_Mem_Imm, Branch_Target, ID_EX_imm_out;
+    logic [31:0] EX_Mem_pc_out, EX_Mem_Imm, Branch_Target, ID_EX_imm_out, ID_EX_pc_out;
     logic branch_flush;
 
     assign branch_flush = ID_EX_Branch_out && ALU_Zero_Flag;
@@ -111,7 +111,7 @@ module top_level (
 
     //ID/EX Register instantiation
     logic [2:0] ID_EX_ALUOp_out;
-    logic [31:0] ID_EX_pc_out, ID_EX_data1_out, ID_EX_data2_out;
+    logic [31:0] ID_EX_data1_out, ID_EX_data2_out;
     logic [4:0] ID_EX_rs1_out, ID_EX_rs2_out;
     logic ID_EX_RegWrite_out, ID_EX_ALUSrc_out, ID_EX_MemWrite_out, ID_EX_Uses_rs2_out;
     ID_EX_Reg id_ex_module (
