@@ -10,12 +10,14 @@ module DataMem (
 
     always_ff @(posedge clk or posedge rst) begin
         if (rst) begin
-            ReadData <= 32'b0;
+            for (int i = 0; i < 32; i++) begin
+                mem[i] <= 32'b0;
+            end
         end else if (MemWrite) begin
             mem[Address] <= WriteData;
-        end else if (MemRead) begin
-            ReadData <= mem[Address];
         end
     end
+
+    assign ReadData = MemRead ? mem[Address] : 32'b0;
 
 endmodule
