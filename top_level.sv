@@ -3,7 +3,7 @@ module top_level (
 );
 
     //PC instantiation
-    logic pc_write_enable, EX_Mem_Branch, EX_Mem_ALU_Zero;
+    logic pc_write_enable, EX_Mem_Branch, EX_Mem_ALU_Zero, ID_EX_Branch_out, ALU_Zero_Flag;
     logic [31:0] pc_new_in, pc_new_out;
     
     PC pc_module (
@@ -16,15 +16,15 @@ module top_level (
 
     //PC Adder Logic
     logic [31:0] pc_adder_out;
-    logic [31:0] EX_Mem_pc_out, EX_Mem_Imm, Branch_Target;
+    logic [31:0] EX_Mem_pc_out, EX_Mem_Imm, Branch_Target, ID_EX_imm_out;
     logic branch_flush;
 
-    assign branch_flush = EX_Mem_Branch && EX_Mem_ALU_Zero;
+    assign branch_flush = ID_EX_Branch_out && ALU_Zero_Flag;
 
     //PC incremnter logic
     assign pc_adder_out = pc_new_out + 4;
     //Branch Target Logic
-    assign Branch_Target = EX_Mem_pc_out + EX_Mem_Imm;
+    assign Branch_Target = ID_EX_pc_out + ID_EX_imm_out;
     //PC next address selection
     assign pc_new_in = (branch_flush) ? Branch_Target : pc_adder_out;
 
@@ -111,9 +111,9 @@ module top_level (
 
     //ID/EX Register instantiation
     logic [2:0] ID_EX_ALUOp_out;
-    logic [31:0] ID_EX_pc_out, ID_EX_data1_out, ID_EX_data2_out, ID_EX_imm_out;
+    logic [31:0] ID_EX_pc_out, ID_EX_data1_out, ID_EX_data2_out;
     logic [4:0] ID_EX_rs1_out, ID_EX_rs2_out;
-    logic ID_EX_RegWrite_out, ID_EX_ALUSrc_out, ID_EX_MemWrite_out, ID_EX_Branch_out, ID_EX_Uses_rs2_out;
+    logic ID_EX_RegWrite_out, ID_EX_ALUSrc_out, ID_EX_MemWrite_out, ID_EX_Uses_rs2_out;
     ID_EX_Reg id_ex_module (
         .clk(clk),
         .rst(rst),
@@ -172,7 +172,7 @@ module top_level (
 
     //ALU instantiation 
     logic [31:0] ALU_result;
-    logic ALU_Zero_Flag;
+    //logic ALU_Zero_Flag;
 
     ALU_design alu_module (
         .alu_Op(ID_EX_ALUOp_out),
