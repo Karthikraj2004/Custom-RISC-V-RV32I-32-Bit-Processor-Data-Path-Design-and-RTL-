@@ -129,6 +129,58 @@ NOTE: in the above code, X3 from the add x3, x1, x2 instruction needs to be forw
 No bugs found.
 
 
+## Branching Verfication
+
+### Assembly Code For Test
+<img width="124" height="88" alt="image" src="https://github.com/user-attachments/assets/03b9fa09-2609-4aeb-80fa-b055130d353f" />
+
+NOTE: in the above code, addi x3, x0, 99 must be skipped due to beq x1, x2, +8 instruction executing.
+
+### Assembly Machine Code 
+<img width="67" height="89" alt="image" src="https://github.com/user-attachments/assets/5adf853b-717d-413d-bc36-22d6496c34ca" />
+
+### Test Script and Waveform Results 
+
+
+### Bugs Found and Fixes
+Bug: x3 expected 0, but got 99. This was because addi x3, x0, 99 already had entered the ID/EX register by the time branch flush had become 1 which means that the register value for x3 had already been changed before the branch flush signal could reach the registers and void the numbers. The fix was to re-write the branching logic to use ALU_Zero which updated synchronously (instead of EX/MEM_ALU_Zero which updated asynchronously) and send the branching signal from ID/EX instead of EX/MEM, that way the instruction coming after the branch could immediately be flushed once the branch is detected and ALU_Zero is true.
+
+
+## Combined/Integrated Program
+
+### Assembly Code For Test
+<img width="423" height="196" alt="image" src="https://github.com/user-attachments/assets/a4252733-f6f1-42ba-bee2-9588c70aace3" />
+
+### Assembly Machine Code 
+<img width="81" height="216" alt="image" src="https://github.com/user-attachments/assets/00d0b660-c17c-477c-9612-814f9d8d9030" />
+
+
+### Test Script and Waveform Results 
+
+
+### Bugs Found and Fixes
+No bugs found.
+
+
+## BEQ Dependence on ALU Forwarding Test
+
+### Assembly Code For Test
+<img width="220" height="177" alt="image" src="https://github.com/user-attachments/assets/7d0293e1-7d09-44b6-819f-cd581570aefd" />
+
+NOTE: In the code above, the beq x3, x3, +8 instruction has an immediate dependency on x3 from the add x3, x1, x2 instruction, necessitating the need for forwarding to make the updated x3 value available for the beq instruction.
+
+### Assembly Machine Code 
+<img width="117" height="183" alt="image" src="https://github.com/user-attachments/assets/3c95c94d-b218-477a-b9ee-02bb5fd5ba4e" />
+
+### Test Script and Waveform Results 
+
+
+### Bugs Found and Fixes
+No bugs found.
+
+
+
+
 
 
 
