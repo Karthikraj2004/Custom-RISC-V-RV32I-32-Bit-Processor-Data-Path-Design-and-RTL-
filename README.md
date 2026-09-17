@@ -156,6 +156,9 @@ Bug: x3 expected 0, but got 99. This was because addi x3, x0, 99 already had ent
 
 
 ### Test Script and Waveform Results 
+<img width="786" height="451" alt="CPU_Integration_Test_Script" src="https://github.com/user-attachments/assets/bb8cd6e2-63b6-4786-866a-5967c848ab0f" />
+
+<img width="1170" height="782" alt="CPU_Integration_Test_Waveform" src="https://github.com/user-attachments/assets/a37ed7eb-32db-4656-beca-6452873e7121" />
 
 
 ### Bugs Found and Fixes
@@ -173,7 +176,11 @@ NOTE: In the code above, the beq x3, x3, +8 instruction has an immediate depende
 <img width="117" height="183" alt="image" src="https://github.com/user-attachments/assets/3c95c94d-b218-477a-b9ee-02bb5fd5ba4e" />
 
 ### Test Script and Waveform Results 
+<img width="822" height="347" alt="Branch_Forward_Test_Script" src="https://github.com/user-attachments/assets/80420d4b-6cdc-46ad-9dcb-721fc8f23068" />
 
+<img width="1257" height="772" alt="Branch_Forward_Test_Waveform_1" src="https://github.com/user-attachments/assets/fb71ef08-bf65-4dfd-ac02-2a4700df2bd3" />
+
+<img width="1271" height="772" alt="Branch_Forward_Test_Waveform_2" src="https://github.com/user-attachments/assets/abe6af6e-a01e-4378-ab71-8f5799aeba9c" />
 
 ### Bugs Found and Fixes
 No bugs found.
