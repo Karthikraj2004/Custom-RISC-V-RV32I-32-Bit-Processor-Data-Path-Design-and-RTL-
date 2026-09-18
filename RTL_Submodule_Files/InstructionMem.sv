@@ -1,8 +1,8 @@
 module InstructionMem (
     input logic [31:0] pc,
-    input logic        imem_write_enable;
-    input logic [4:0]  imem_write_addr;
-    input logic [31:0] imem_write_data;
+    input logic        imem_write_enable,
+    input logic [4:0]  imem_write_addr,
+    input logic [31:0] imem_write_data,
     output logic [31:0] instruction
 );
 
