@@ -1,5 +1,8 @@
 module top_level (
     input logic clk, rst,
+    input logic        imem_write_enable,
+    input logic [4:0]  imem_write_addr,
+    input logic [31:0] imem_write_data
     output logic [31:0] pc_out, alu_result_out, writeback_data_out
 );
 
@@ -34,10 +37,14 @@ module top_level (
     //Output instruction from IM
     logic [31:0] instruction;
     InstructionMem im_module (
+        .clk(clk),
         .pc(pc_new_out),
+        .write_enable(imem_write_enable),
+        .write_addr(imem_write_addr),
+        .write_data(imem_write_data),
         .instruction(instruction)
     );
-
+   
     //IF/ID Register instantiation
     logic IF_ID_write;
     logic [31:0] IF_ID_pc_out, IF_ID_instruction_out;
