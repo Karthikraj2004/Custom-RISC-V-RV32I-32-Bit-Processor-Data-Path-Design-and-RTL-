@@ -26,7 +26,8 @@ The following datapath shows the pipeline stages and Hazard Detection/Forward De
 <img width="2122" height="1110" alt="DataPath1 drawio" src="https://github.com/user-attachments/assets/e3d956f6-5a1b-4d58-8d24-d09e3a08ace3" />
 
 The following datapath shows the pipelined stages, HDU, FDU along with the CU signals. 
-<img width="2215" height="1458" alt="DataPath1 (1)" src="https://github.com/user-attachments/assets/3878a527-9e3f-48bb-b499-bd6a7b8c4de6" />
+<img width="2461" height="1619" alt="DataPath1 drawio (1)" src="https://github.com/user-attachments/assets/e91dc65a-147b-4777-a7bd-f5e2ccc11398" />
+
 
 # RTL Development and Verification
 The CPU was developed using SystemVerilog, and 13 submodules were developed which were subsequently integrated in the top level testbench. The testing and verification process involved writing RISC V assembly code and uploading the equivalent machine code (which was in a .mem file) to the CPU. Various assembly instructions pertaining to the ALU operations, load, store, hazard detection, forward detection, integrated tests and ALU/branch testing. The specific RISC V assembly code, equivalent machine code and subsequent test results are detailed below:
