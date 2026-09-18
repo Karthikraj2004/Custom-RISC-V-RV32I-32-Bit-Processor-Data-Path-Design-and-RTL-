@@ -2,7 +2,7 @@ module top_level (
     input logic clk, rst,
     input logic        imem_write_enable,
     input logic [4:0]  imem_write_addr,
-    input logic [31:0] imem_write_data
+    input logic [31:0] imem_write_data,
     output logic [31:0] pc_out, alu_result_out, writeback_data_out
 );
 
