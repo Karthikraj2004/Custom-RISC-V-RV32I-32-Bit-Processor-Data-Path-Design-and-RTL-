@@ -36,12 +36,13 @@ module top_level (
 
     //Output instruction from IM
     logic [31:0] instruction;
+
     InstructionMem im_module (
         .clk(clk),
         .pc(pc_new_out),
-        .write_enable(imem_write_enable),
-        .write_addr(imem_write_addr),
-        .write_data(imem_write_data),
+        .imem_write_enable(imem_write_enable),
+        .imem_write_addr(imem_write_addr),
+        .imem_write_data(imem_write_data),
         .instruction(instruction)
     );
    
@@ -121,7 +122,7 @@ module top_level (
     logic [2:0] ID_EX_ALUOp_out;
     logic [31:0] ID_EX_data1_out, ID_EX_data2_out;
     logic [4:0] ID_EX_rs1_out, ID_EX_rs2_out;
-    logic ID_EX_RegWrite_out, ID_EX_ALUSrc_out, ID_EX_MemWrite_out, ID_EX_Uses_rs2_out;
+    logic ID_EX_RegWrite_out, ID_EX_ALUSrc_out, ID_EX_MemWrite_out, ID_EX_Uses_rs2_out, ID_EX_MemtoReg_out;
     ID_EX_Reg id_ex_module (
         .clk(clk),
         .rst(rst),

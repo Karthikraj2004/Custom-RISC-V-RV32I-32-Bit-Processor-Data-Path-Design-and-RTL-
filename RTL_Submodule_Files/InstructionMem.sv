@@ -1,4 +1,5 @@
 module InstructionMem (
+    input logic clk,
     input logic [31:0] pc,
     input logic        imem_write_enable,
     input logic [4:0]  imem_write_addr,
