@@ -1,5 +1,6 @@
 module top_level (
-    input logic clk, rst
+    input logic clk, rst,
+    output logic [31:0] pc_out, alu_result_out, writeback_data_out
 );
 
     //PC instantiation
@@ -278,6 +279,10 @@ module top_level (
 
     //Mem_WB Register instantiation end
     assign RF_Write_Data = (MEM_WB_MemtoReg_out) ? MEM_WB_ReadData_out  :   MEM_WB_ALU_result_out;
+
+    assign pc_out = pc_new_out;
+    assign alu_result_out = ALU_result;
+    assign writeback_data_out = RF_Write_Data;
 
 
 endmodule
