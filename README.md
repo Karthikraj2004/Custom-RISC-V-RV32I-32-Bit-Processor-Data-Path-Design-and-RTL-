@@ -186,6 +186,18 @@ NOTE: In the code above, the beq x3, x3, +8 instruction has an immediate depende
 ### Bugs Found and Fixes
 No bugs found.
 
+## Synthesis Results on Cadence Genus
+After the verification of the CPU on ModelSim using uploaded machine code via the testbench, the CPU was then taken through the synthesis process on Cadence Genus using the GPDK045 process technology. Several errors and difficulties were encountered in this stage:
+ - Initially, the top level had not assigned any outputs, which caused the Genus tool to assign large chunks of the CPU as irrelevant logic (as it did not see them driving any external output or being driven by an external input). The top level file had to be edited such that some outputs were assigned without changing any logic associated with the CPU function.
+ -  Lack of external driving signals caused the memory array in the InstructionMem to be deleted. To fix this, an asynchronous reading mechanism was added where external inputs were added to asynchronously read data into the instruction memory array, while the memory read remained synchronous so as not to change the logic structure.
+
+After fixing the issues encountered, the RTL for the CPU was succesfully synthesized using Cadence Genus targeting the GPDK045 standard-cell library.  The synthesis flow considted of generic synthesis (syn_generic_, technology mapping (syn_map), and post mapping optimization (syn-opt). Timing constraints were applied for a 333 MHz target clock.
+
+### Synthesis Flow
+<img width="222" height="727" alt="Synthesis_Flow_Diagram drawio" src="https://github.com/user-attachments/assets/ad88b972-1f06-432e-afee-a4f2bbc3da51" />
+
+### Timing Constraints
+
 
 
 
