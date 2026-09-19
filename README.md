@@ -168,13 +168,16 @@ No bugs found.
 
 ## BEQ Dependence on ALU Forwarding Test
 
+
 ### Assembly Code For Test
 <img width="220" height="177" alt="image" src="https://github.com/user-attachments/assets/7d0293e1-7d09-44b6-819f-cd581570aefd" />
 
 NOTE: In the code above, the beq x3, x3, +8 instruction has an immediate dependency on x3 from the add x3, x1, x2 instruction, necessitating the need for forwarding to make the updated x3 value available for the beq instruction.
 
+
 ### Assembly Machine Code 
 <img width="117" height="183" alt="image" src="https://github.com/user-attachments/assets/3c95c94d-b218-477a-b9ee-02bb5fd5ba4e" />
+
 
 ### Test Script and Waveform Results 
 <img width="822" height="347" alt="Branch_Forward_Test_Script" src="https://github.com/user-attachments/assets/80420d4b-6cdc-46ad-9dcb-721fc8f23068" />
@@ -183,8 +186,10 @@ NOTE: In the code above, the beq x3, x3, +8 instruction has an immediate depende
 
 <img width="1271" height="772" alt="Branch_Forward_Test_Waveform_2" src="https://github.com/user-attachments/assets/abe6af6e-a01e-4378-ab71-8f5799aeba9c" />
 
+
 ### Bugs Found and Fixes
 No bugs found.
+
 
 ## Synthesis Results on Cadence Genus
 After the verification of the CPU on ModelSim using uploaded machine code via the testbench, the CPU was then taken through the synthesis process on Cadence Genus using the GPDK045 process technology. Several errors and difficulties were encountered in this stage:
@@ -193,6 +198,7 @@ After the verification of the CPU on ModelSim using uploaded machine code via th
 
 After fixing the issues encountered, the RTL for the CPU was succesfully synthesized using Cadence Genus targeting the GPDK045 standard-cell library.  The synthesis flow considted of generic synthesis (syn_generic_, technology mapping (syn_map), and post mapping optimization (syn-opt). Timing constraints were applied for a 333 MHz target clock.
 
+
 ### Synthesis Flow
 <img width="222" height="727" alt="Synthesis_Flow_Diagram drawio" src="https://github.com/user-attachments/assets/ad88b972-1f06-432e-afee-a4f2bbc3da51" />
 
@@ -200,22 +206,27 @@ After fixing the issues encountered, the RTL for the CPU was succesfully synthes
 ### Timing Constraints
 <img width="631" height="171" alt="image" src="https://github.com/user-attachments/assets/3448f6ed-802c-4a4f-868a-f45ba9104f48" />
 
+
 ### Synthesis Results
+
 
 #### Timing Results 
 <img width="936" height="129" alt="image" src="https://github.com/user-attachments/assets/19568054-e4e6-47ea-9b23-8ce561aedb8e" />
 
 The result above is from the timing report generated from the Synthesis. As shown, the worst setup slack time is approximately +0.101 ns and the associated path is from the EX/MEM Pipeline register -> PC. The positive slack time is indicative that the CPU is functional at the target frequency of 333 MHz, and a lower frequency optimization is not necessary.
 
+
 #### Area Results
 <img width="700" height="302" alt="Synthesis_Area_Report" src="https://github.com/user-attachments/assets/34bfdaf8-6c5c-41f4-bad7-29d88e95ce7a" />
 
 The standard cell area after synthesis generation and optimization for the CPU was 34,149.726 um^2, with the Data Memory module contributing the most area at 9,863.964 um^2, which is likely due to the use of many flip-flops for the 32x32 memory array in the Data Memory. 
 
+
 #### Gate Use Reports
 <img width="397" height="247" alt="Synthesis_Gate_report" src="https://github.com/user-attachments/assets/4697c4f6-20a8-49b8-963a-d1f75e5d6913" />
 
 From the gate use reports, it can be seen that the sequential logic gates take up the vast majority of the core area at a whopping 77%. This is likely due to the large use of memory arrays in the Instruction Memory and Data Memory as well as large pipeline registers. The relatively smaller contribution of the logic gates can be attributed to the smaller number of logic operations being implemented (only 8 RV32I logical operations were implemented). 
+
 
 #### Critical Path Analysis
 As stated previously, the critical path of the CPU was of the following nature:
@@ -228,16 +239,25 @@ As stated previously, the critical path of the CPU was of the following nature:
 
 The worst setup path propagates from EX/MEM pipeline register through combinational logic into the PC register. At the set clock period target of 3.003 ns, the critical path meets timing with +101 ps of remaining setup margin. 
 
+
 #### Critical Path Schematic
 <img width="717" height="933" alt="CPU_Critical_path_image" src="https://github.com/user-attachments/assets/082184c1-9616-41ce-a1bf-69961e8fda13" />
+
 
 #### Check_Design Results
 <img width="1191" height="645" alt="CPU_Synthesis_Check_Design" src="https://github.com/user-attachments/assets/f22cf444-6a18-4485-9c89-fcb54c36208a" />
 
 Post synthesis check_design reported no unresolved references, undriven ports, multidrive nets, unloaded sequential pins or other logic connectivity errors. 
 
+
+#### Synthesized CPU Schematic
+<img width="2559" height="1237" alt="Synthesized_CPU" src="https://github.com/user-attachments/assets/c7f2fc39-7893-4523-9270-f77cd6754e01" />
+
+
 #### Summary
 The synthesis and subsequent reports showed the large contribution of sequential memory elements (likely in the form of flip flops) to the cell area size. However, these are pre-layout estimates, which means that the timing, area, and power will have to be checked again after placement, clock-tree synthesis, routing and parasitic extraction in Cadence Innovus. 
+
+
 
 
 
