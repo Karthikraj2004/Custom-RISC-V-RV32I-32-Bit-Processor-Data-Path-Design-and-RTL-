@@ -253,6 +253,9 @@ Post synthesis check_design reported no unresolved references, undriven ports, m
 #### Synthesized CPU Schematic
 <img width="2559" height="1237" alt="Synthesized_CPU" src="https://github.com/user-attachments/assets/c7f2fc39-7893-4523-9270-f77cd6754e01" />
 
+<img width="242" height="714" alt="Synthesized_CPU_Closeup" src="https://github.com/user-attachments/assets/34974e50-624d-4779-a8ea-bb506c832b3f" />
+
+
 
 #### Summary
 The synthesis and subsequent reports showed the large contribution of sequential memory elements (likely in the form of flip flops) to the cell area size. However, these are pre-layout estimates, which means that the timing, area, and power will have to be checked again after placement, clock-tree synthesis, routing and parasitic extraction in Cadence Innovus. 
