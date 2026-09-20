@@ -1,5 +1,5 @@
 # Custom RISC V RV32I CPU Project
-By: Riddhiman Das Roy, Karthikraj Maheshkumar
+By: Karthikraj Maheshkumar
 
 ## Developmental Steps
 #### 1.) Project Definition Stage 
