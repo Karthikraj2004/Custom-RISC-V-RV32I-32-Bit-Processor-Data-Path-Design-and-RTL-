@@ -146,38 +146,47 @@ NOTE: in the above code, addi x3, x0, 99 must be skipped due to beq x1, x2, +8 i
 ### Bugs Found and Fixes
 Bug: x3 expected 0, but got 99. This was because addi x3, x0, 99 already had entered the ID/EX register by the time branch flush had become 1 which means that the register value for x3 had already been changed before the branch flush signal could reach the registers and void the numbers. The fix was to re-write the branching logic to use ALU_Zero which updated synchronously (instead of EX/MEM_ALU_Zero which updated asynchronously) and send the branching signal from ID/EX instead of EX/MEM, that way the instruction coming after the branch could immediately be flushed once the branch is detected and ALU_Zero is true.
 
+ <br><br> 
 
 ## Combined/Integrated Program
 
 ### Assembly Code For Test
 <img width="423" height="196" alt="image" src="https://github.com/user-attachments/assets/a4252733-f6f1-42ba-bee2-9588c70aace3" />
 
+ <br>
+
 ### Assembly Machine Code 
 <img width="81" height="216" alt="image" src="https://github.com/user-attachments/assets/00d0b660-c17c-477c-9612-814f9d8d9030" />
 
+ <br>
 
 ### Test Script and Waveform Results 
 <img width="786" height="451" alt="CPU_Integration_Test_Script" src="https://github.com/user-attachments/assets/bb8cd6e2-63b6-4786-866a-5967c848ab0f" />
 
 <img width="1170" height="782" alt="CPU_Integration_Test_Waveform" src="https://github.com/user-attachments/assets/a37ed7eb-32db-4656-beca-6452873e7121" />
 
+ <br>
 
 ### Bugs Found and Fixes
 No bugs found.
 
+ <br><br> 
 
 ## BEQ Dependence on ALU Forwarding Test
 
+ <br><br> 
 
 ### Assembly Code For Test
 <img width="220" height="177" alt="image" src="https://github.com/user-attachments/assets/7d0293e1-7d09-44b6-819f-cd581570aefd" />
 
 NOTE: In the code above, the beq x3, x3, +8 instruction has an immediate dependency on x3 from the add x3, x1, x2 instruction, necessitating the need for forwarding to make the updated x3 value available for the beq instruction.
 
+ <br><br> 
 
 ### Assembly Machine Code 
 <img width="117" height="183" alt="image" src="https://github.com/user-attachments/assets/3c95c94d-b218-477a-b9ee-02bb5fd5ba4e" />
 
+ <br><br> 
 
 ### Test Script and Waveform Results 
 <img width="822" height="347" alt="Branch_Forward_Test_Script" src="https://github.com/user-attachments/assets/80420d4b-6cdc-46ad-9dcb-721fc8f23068" />
@@ -202,31 +211,37 @@ After fixing the issues encountered, the RTL for the CPU was succesfully synthes
 ### Synthesis Flow
 <img width="222" height="727" alt="Synthesis_Flow_Diagram drawio" src="https://github.com/user-attachments/assets/ad88b972-1f06-432e-afee-a4f2bbc3da51" />
 
+ <br><br> 
 
 ### Timing Constraints
 <img width="631" height="171" alt="image" src="https://github.com/user-attachments/assets/3448f6ed-802c-4a4f-868a-f45ba9104f48" />
 
+ <br><br> 
 
 ### Synthesis Results
 
+ <br><br> 
 
 #### Timing Results 
 <img width="936" height="129" alt="image" src="https://github.com/user-attachments/assets/19568054-e4e6-47ea-9b23-8ce561aedb8e" />
 
 The result above is from the timing report generated from the Synthesis. As shown, the worst setup slack time is approximately +0.101 ns and the associated path is from the EX/MEM Pipeline register -> PC. The positive slack time is indicative that the CPU is functional at the target frequency of 333 MHz, and a lower frequency optimization is not necessary.
 
+ <br><br> 
 
 #### Area Results
 <img width="700" height="302" alt="Synthesis_Area_Report" src="https://github.com/user-attachments/assets/34bfdaf8-6c5c-41f4-bad7-29d88e95ce7a" />
 
 The standard cell area after synthesis generation and optimization for the CPU was 34,149.726 um^2, with the Data Memory module contributing the most area at 9,863.964 um^2, which is likely due to the use of many flip-flops for the 32x32 memory array in the Data Memory. 
 
+ <br><br> 
 
 #### Gate Use Reports
 <img width="397" height="247" alt="Synthesis_Gate_report" src="https://github.com/user-attachments/assets/4697c4f6-20a8-49b8-963a-d1f75e5d6913" />
 
 From the gate use reports, it can be seen that the sequential logic gates take up the vast majority of the core area at a whopping 77%. This is likely due to the large use of memory arrays in the Instruction Memory and Data Memory as well as large pipeline registers. The relatively smaller contribution of the logic gates can be attributed to the smaller number of logic operations being implemented (only 8 RV32I logical operations were implemented). 
 
+ <br><br> 
 
 #### Critical Path Analysis
 As stated previously, the critical path of the CPU was of the following nature:
@@ -239,16 +254,19 @@ As stated previously, the critical path of the CPU was of the following nature:
 
 The worst setup path propagates from EX/MEM pipeline register through combinational logic into the PC register. At the set clock period target of 3.003 ns, the critical path meets timing with +101 ps of remaining setup margin. 
 
+ <br><br> 
 
 #### Critical Path Schematic
 <img width="717" height="933" alt="CPU_Critical_path_image" src="https://github.com/user-attachments/assets/082184c1-9616-41ce-a1bf-69961e8fda13" />
 
+ <br><br> 
 
 #### Check_Design Results
 <img width="1191" height="645" alt="CPU_Synthesis_Check_Design" src="https://github.com/user-attachments/assets/f22cf444-6a18-4485-9c89-fcb54c36208a" />
 
 Post synthesis check_design reported no unresolved references, undriven ports, multidrive nets, unloaded sequential pins or other logic connectivity errors. 
 
+ <br><br> 
 
 #### Synthesized CPU Schematic
 <img width="2559" height="1237" alt="Synthesized_CPU" src="https://github.com/user-attachments/assets/c7f2fc39-7893-4523-9270-f77cd6754e01" />
