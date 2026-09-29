@@ -286,23 +286,33 @@ The generated netlist from Cadence Genus was then taken through the PnR process 
 <img width="1298" height="952" alt="PnR_Power_1" src="https://github.com/user-attachments/assets/639ef215-c7ce-4699-a036-232e1cb56f84" />
 
 <img width="866" height="829" alt="PnR_Power_2" src="https://github.com/user-attachments/assets/172be2c0-6bb0-40ec-9abb-8b8f5ffaccf3" />
+
  <br> 
+ 
 ### Final DRC Check
 
 <img width="779" height="1030" alt="Final_DRC_Check" src="https://github.com/user-attachments/assets/1fe71384-1416-457a-96bb-699ff4fbed66" />
+
  <br> 
+ 
 ### Final Connectivity Check
 
 <img width="499" height="486" alt="Final_verify_connectivity" src="https://github.com/user-attachments/assets/0b73547c-8bf1-4a33-9e6c-e75c732bfc1a" />
+
  <br> 
+ 
 ### Final Antenna Check
 
 <img width="690" height="229" alt="Verify_Antenna_Check" src="https://github.com/user-attachments/assets/40c0f2a9-b9d1-4827-a123-6e4b6da44a0b" />
+
  <br> 
+ 
 ### GDS2 Stream Out 
 
 <img width="464" height="992" alt="GDS2StreamOutData" src="https://github.com/user-attachments/assets/a7b564cd-59d8-4919-a864-5539233487f3" />
+
  <br> 
+ 
 ### Final Routed Layout Image
 
 <img width="639" height="667" alt="CPU_Pic" src="https://github.com/user-attachments/assets/a40b69f0-15fb-4d8d-980e-fac718fd2284" />
