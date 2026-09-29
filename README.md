@@ -325,7 +325,7 @@ The generated netlist from Cadence Genus was then taken through the PnR process 
  
 ### Final Routed Layout Image
 
-<img width="639" height="667" alt="CPU_Pic" src="https://github.com/user-attachments/assets/a40b69f0-15fb-4d8d-980e-fac718fd2284" />
+<img width="839" height="867" alt="CPU_Pic" src="https://github.com/user-attachments/assets/a40b69f0-15fb-4d8d-980e-fac718fd2284" />
 
 
 
