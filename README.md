@@ -313,6 +313,9 @@ The generated netlist from Cadence Genus was then taken through the PnR process 
  <br>
 
 ### CTS Skew 
+<img width="1522" height="347" alt="CPU_CLock_Ckew" src="https://github.com/user-attachments/assets/b6f2141b-8df4-4791-8d1d-bb9f424d8482" />
+
+<br>
 
 ### Critical Setup Path
 
@@ -360,7 +363,7 @@ The generated netlist from Cadence Genus was then taken through the PnR process 
  
 ### Final Routed Layout Image
 
-<img width="839" height="867" alt="CPU_Pic" src="https://github.com/user-attachments/assets/a40b69f0-15fb-4d8d-980e-fac718fd2284" />
+<img width="900" height="950" alt="CPU_Pic" src="https://github.com/user-attachments/assets/a40b69f0-15fb-4d8d-980e-fac718fd2284" />
 
 
 
